@@ -1,6 +1,6 @@
 import { ProductsService } from './../services/products.service';
 import { Controller, Get } from '@nestjs/common';
-import { Product } from '../models/product.model';
+import { Product } from '../entities/product.entity';
 
 @Controller('products')
 export class ProductsController {
@@ -9,7 +9,7 @@ export class ProductsController {
     ) { }
 
     @Get()
-    public async allProducts(): Promise<Product[]> {
-        return this.productService.getAllProducts();
+    public async allProducts(): Promise<Product> {
+        return this.productService.getProductByName();
     }
 }
