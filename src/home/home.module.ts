@@ -1,3 +1,4 @@
+import { PlatformModule } from './../shared/platform/platform.module';
 import { ProductModule } from './../shared/product/product.module';
 import { Module } from '@nestjs/common';
 
@@ -6,7 +7,7 @@ import { HomeService } from './home.service';
 
 
 @Module({
-  imports: [ProductModule],
+  imports: [ProductModule, PlatformModule],
   controllers: [HomeController],
   providers: [HomeService]
 })
