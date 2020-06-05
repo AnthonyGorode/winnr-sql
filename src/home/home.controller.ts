@@ -1,6 +1,7 @@
 import { HomeService } from './home.service';
 import { Product } from './../shared/product/product.entity';
 import { Controller, Get } from '@nestjs/common';
+import { Game } from 'src/shared/game/game.entity';
 
 @Controller('home')
 export class HomeController {
@@ -22,6 +23,16 @@ export class HomeController {
     @Get('only')
     public witcherIIIProduct(): Promise<Product> {
         return this.homeService.getProductByName();
+    }
+
+    @Get('games')
+    public allGamesProducts(): Promise<Game[]> {
+        return this.homeService.getAllGames();
+    }
+
+    @Get('product-list')
+    public allProductByCategory(): any {
+        return this.homeService.getAllProductByCategory();
     }
 
 }
