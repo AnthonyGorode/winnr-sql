@@ -1,5 +1,12 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
-import { PlatformProduct } from '../platform/platform.entity';
+import { Game } from './../game/game.entity';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToMany, OneToOne } from 'typeorm';
+import { Platform } from '../platform/platform.entity';
+import { ProductRequirement } from '../product_requirement/product_requirement.entity';
+import { ProductTranslation } from '../product_translation/product_translation.entity';
+import { Skins } from '../skins/skins.entity';
+import { GiftCard } from '../gift_card/gift_card.entity';
+import { BattleRoyale } from '../battle_royale/battle_royale.entity';
+import { Giveaway } from '../giveaway/giveaway.entity';
 
 @Entity()
 export class Product {
@@ -7,12 +14,36 @@ export class Product {
     @PrimaryGeneratedColumn()
     id_product: number;
 
-    @ManyToOne(() => PlatformProduct, platformProduct => platformProduct.products)
+    @ManyToOne(() => Platform, platform => platform.products)
     @JoinColumn({ name: 'id_platform' })
-    platform: PlatformProduct;
+    platform: Platform;
+
+    @OneToMany(() => ProductRequirement, productRequirement => productRequirement.product)
+    productRequirement!: ProductRequirement[];
+
+    @OneToMany(() => ProductTranslation, productTranslation => productTranslation.product)
+    productTranslation: ProductTranslation[];
+
+    @OneToMany(() => BattleRoyale, battleRoyale => battleRoyale.product)
+    battleRoyales: BattleRoyale[];
+
+    @OneToMany(() => Giveaway, giveaway => giveaway.product)
+    giveaways: Giveaway[];
+
+    @OneToOne(() => Game, game => game.product)
+    game!: Game;
+    
+    @OneToOne(() => Skins, skins => skins.product)
+    skins!: Skins;
+
+    @OneToOne(() => GiftCard, giftCard => giftCard.product)
+    giftCard!: GiftCard;
 
     @Column({ length: 255 })
     name_product: string;
+
+    @Column()
+    type_product: number;
 
     @Column({ length: 255 })
     category_product: string;

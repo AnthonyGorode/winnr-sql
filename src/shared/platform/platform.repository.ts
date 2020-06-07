@@ -1,7 +1,7 @@
 import { EntityRepository, Repository } from 'typeorm';
-import { PlatformProduct } from '../platform/platform.entity';
+import { Platform } from '../platform/platform.entity';
 
-@EntityRepository(PlatformProduct)
-export class PlatformRepository extends Repository<PlatformProduct> {
+@EntityRepository(Platform)
+export class PlatformRepository extends Repository<Platform> {
 
 }
