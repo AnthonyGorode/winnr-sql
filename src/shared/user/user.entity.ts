@@ -1,3 +1,4 @@
+import { Order } from './../order/order.entity';
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne, JoinColumn } from "typeorm";
 import { UserBattleRoyale } from "../user_battle_royale/user_battle_royale.entity";
 import { UserGiveaway } from "../user_giveaway/user_giveaway.entity";
@@ -14,6 +15,9 @@ export class User {
     @ManyToOne(() => User, user => user.sponsor)
     @JoinColumn({ name: 'sponsored_by' })
     sponsoredBy: User;
+
+    @OneToMany(() => Order, order => order.user)
+    orders: Order[];
 
     @OneToMany(() => UserBattleRoyale, userBattleRoyale => userBattleRoyale.user)
     battleRoyalePlayed: UserBattleRoyale[];

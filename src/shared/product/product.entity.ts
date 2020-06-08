@@ -7,6 +7,7 @@ import { Skins } from '../skins/skins.entity';
 import { GiftCard } from '../gift_card/gift_card.entity';
 import { BattleRoyale } from '../battle_royale/battle_royale.entity';
 import { Giveaway } from '../giveaway/giveaway.entity';
+import { OrderProduct } from '../order_product/order_product.entity';
 
 @Entity()
 export class Product {
@@ -29,6 +30,9 @@ export class Product {
 
     @OneToMany(() => Giveaway, giveaway => giveaway.product)
     giveaways: Giveaway[];
+
+    @OneToMany(() => OrderProduct, orderProduct => orderProduct.product)
+    ordersProduct: OrderProduct[];
 
     @OneToOne(() => Game, game => game.product)
     game!: Game;

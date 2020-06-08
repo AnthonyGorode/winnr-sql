@@ -1,11 +1,11 @@
+import { SharedModule } from './../../shared/shared.module';
 import { ShoppingController } from './shopping.controller';
-import { AssociationModule } from '../../shared/association/association.module';
 import { Module } from '@nestjs/common';
 import { ShoppingService } from './shopping.service';
 
 @Module({
   imports: [
-    AssociationModule
+    SharedModule
   ],
   controllers: [ShoppingController],
   providers: [ShoppingService]
