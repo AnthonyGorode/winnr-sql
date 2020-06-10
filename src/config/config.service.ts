@@ -1,4 +1,5 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+// import { join } from 'path';
 
 require('dotenv').config();
 
@@ -40,6 +41,7 @@ class ConfigService {
       database: this.getValue('MYSQL_DATABASE'),
 
       autoLoadEntities: true,
+      // subscribers: [join(__dirname, '**', '*.entity.{ts,js}')],
 
       ssl: this.isProduction(),
     };

@@ -1,7 +1,10 @@
+/* eslint-disable @typescript-eslint/camelcase */
 import { Order } from './../order/order.entity';
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne, JoinColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne, JoinColumn, BeforeInsert } from "typeorm";
 import { UserBattleRoyale } from "../user_battle_royale/user_battle_royale.entity";
 import { UserGiveaway } from "../user_giveaway/user_giveaway.entity";
+import { Address } from '../address/address.entity';
+import { Notification } from '../notification/notification.entity';
 
 @Entity()
 export class User {
@@ -24,6 +27,15 @@ export class User {
 
     @OneToMany(() => UserGiveaway, userGiveaway => userGiveaway.user)
     giveawayPlayed: UserGiveaway[];
+
+    @OneToMany(() => Address, address => address.userBilling)
+    billingAddress: Address[];
+
+    @OneToMany(() => Notification, notification => notification.user)
+    notifications: Notification[];
+
+    @OneToMany(() => Address, address => address.userDelivery)
+    deliveryAddress: Address[];
 
     @Column({ length: 255 })
     name_user: string;
@@ -53,10 +65,10 @@ export class User {
     rank_user: string;
 
     @Column({ type: 'datetime' })
-    created_at: string;
+    created_at: Date;
 
     @Column({ type: 'datetime' })
-    verified_at: string;
+    verified_at: Date;
 
     @Column("tinyint")
     is_activated: number;
@@ -66,5 +78,10 @@ export class User {
 
     @Column("tinyint")
     is_onboarding_done: number;
+
+    @BeforeInsert()
+    createDate() {
+        this.created_at = new Date();
+    }
 
 }
