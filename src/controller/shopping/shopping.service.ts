@@ -10,8 +10,24 @@ import { Order } from './../../shared/order/order.entity';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
+/**
+ * Provide all operations about shopping :
+ * product, order, user
+ *
+ * @export
+ * @class ShoppingService
+ */
 @Injectable()
 export class ShoppingService {
+
+    /**
+     * Creates an instance of ShoppingService.
+     * @param {OrderRepository} orderRepository
+     * @param {UserRepository} userRepository
+     * @param {ProductRepository} productRepository
+     * @param {OrderProductRepository} orderProductRepository
+     * @memberof ShoppingService
+     */
     constructor(
         @InjectRepository(Order)
         private readonly orderRepository: OrderRepository,
@@ -23,10 +39,19 @@ export class ShoppingService {
         private readonly orderProductRepository: OrderProductRepository
     ) {}
 
+    /**
+     * Get a order according to his id
+     * @param id_order 
+     */
     public async getOrderById(id_order: number): Promise<Order> {
         return await this.orderRepository.selectSpecificOrder(id_order);
     }
 
+    /**
+     * Create a order 
+     * @param id_user user id
+     * @param id_products array product ids
+     */
     public async createOrder(id_user: number, id_products: number[]): Promise<Order> {
         try {
             const user: User = await this.userRepository.findOne({ id_user });
@@ -63,6 +88,15 @@ export class ShoppingService {
         }
     }
 
+    /**
+     * Delete product for a specific order
+     * caculate the new order price
+     *
+     * @param {number} id_order order id
+     * @param {number} id_product product id
+     * @returns {Promise<any>} return a successfully message
+     * @memberof ShoppingService
+     */
     public async deleteProductOrder(id_order: number, id_product: number): Promise<any> {
         try {
             const order = await this.orderRepository.findOne({id_order});

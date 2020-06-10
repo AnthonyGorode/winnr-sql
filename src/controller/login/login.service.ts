@@ -9,8 +9,22 @@ import { Address } from 'src/shared/address/address.entity';
 
 import bcrypt = require('bcrypt');
 
+/**
+ * Provide all operations about Login :
+ * user, address
+ * 
+ * @export
+ * @class LoginService
+ */
 @Injectable()
 export class LoginService {
+
+    /**
+     * Creates an instance of LoginService.
+     * @param {UserRepository} userRepository
+     * @param {AddressRepository} addressRepository
+     * @memberof LoginService
+     */
     constructor(
         @InjectRepository(User)
         private readonly userRepository: UserRepository,
@@ -18,6 +32,14 @@ export class LoginService {
         private readonly addressRepository: AddressRepository
     ) {}
 
+    /**
+     * Create a user account &
+     * Create his billing and delivery address
+     *
+     * @param {UserAccountDto} accountUser data sending in request
+     * @returns a new user created
+     * @memberof LoginService
+     */
     public async createAccountUser(accountUser: UserAccountDto) {
         const user = this.userRepository.create();
         const address = this.addressRepository.create();
