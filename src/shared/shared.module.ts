@@ -1,3 +1,7 @@
+import { NotificationTranslationRepository } from './notification_translation/notification_translation.repository';
+import { NotificationTranslation } from './notification_translation/notification_translation.entity';
+import { NotificationRepository } from './notification/notification.repository';
+import { AddressRepository } from './address/address.repository';
 import { OrderProductRepository } from './order_product/order_product.repository';
 import { OrderProduct } from './order_product/order_product.entity';
 import { OrderRepository } from './order/order.repository';
@@ -36,6 +40,8 @@ import { SkinsRepository } from './skins/skins.repository';
 import { User } from './user/user.entity';
 import { UserRepository } from './user/user.repository';
 import { Winch } from './winch/winch.entity';
+import { Address } from './address/address.entity';
+import { Notification } from './notification/notification.entity';
 
 @Module({
     imports: [TypeOrmModule.forFeature([
@@ -56,7 +62,10 @@ import { Winch } from './winch/winch.entity';
         UserGiveaway, UserGiveawayRepository,
         Winch, WinchRepository,
         Order, OrderRepository,
-        OrderProduct, OrderProductRepository
+        OrderProduct, OrderProductRepository,
+        Address, AddressRepository,
+        Notification, NotificationRepository,
+        NotificationTranslation, NotificationTranslationRepository
     ])],
     exports: [TypeOrmModule]
 })
