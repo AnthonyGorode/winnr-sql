@@ -1,17 +1,17 @@
-import { BattleRoyaleRepository } from './../../shared/battle_royale/battle_royale.repository';
-import { BattleRoyale } from './../../shared/battle_royale/battle_royale.entity';
-import { GameRepository } from '../../shared/game/game.repository';
-import { Product } from '../../shared/product/product.entity';
+import { BattleRoyaleRepository } from './../../shared/orm/battle_royale/battle_royale.repository';
+import { BattleRoyale } from './../../shared/orm/battle_royale/battle_royale.entity';
+import { GameRepository } from '../../shared/orm/game/game.repository';
+import { Product } from '../../shared/orm/product/product.entity';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { ProductRepository } from '../../shared/product/product.repository';
-import { Game } from 'src/shared/game/game.entity';
-import { SkinsRepository } from 'src/shared/skins/skins.repository';
-import { Skins } from 'src/shared/skins/skins.entity';
-import { GiftCard } from 'src/shared/gift_card/gift_card.entity';
-import { GiftCardRepository } from 'src/shared/gift_card/gift_card.repository';
-import { GiveawayRepository } from 'src/shared/giveaway/giveaway.repository';
-import { Giveaway } from 'src/shared/giveaway/giveaway.entity';
+import { ProductRepository } from '../../shared/orm/product/product.repository';
+import { Game } from 'src/shared/orm/game/game.entity';
+import { SkinsRepository } from 'src/shared/orm/skins/skins.repository';
+import { Skins } from 'src/shared/orm/skins/skins.entity';
+import { GiftCard } from 'src/shared/orm/gift_card/gift_card.entity';
+import { GiftCardRepository } from 'src/shared/orm/gift_card/gift_card.repository';
+import { GiveawayRepository } from 'src/shared/orm/giveaway/giveaway.repository';
+import { Giveaway } from 'src/shared/orm/giveaway/giveaway.entity';
 
 /**
  * Provide all operations about home :

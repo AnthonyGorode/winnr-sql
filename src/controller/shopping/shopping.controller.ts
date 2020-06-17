@@ -17,6 +17,12 @@ export class ShoppingController {
         return this.shoppingService.getOrderById(+id_order);
     }
 
+    @Get('/name/:name')
+    @HttpCode(200)
+    showOrderNameDetails(@Param('name') name_product: string) {
+        return this.shoppingService.getOrderByName(name_product);
+    }
+
     @Post()
     @HttpCode(201)
     makeNewOrder(@Body() createOrderDto: CreateOrderDto) {

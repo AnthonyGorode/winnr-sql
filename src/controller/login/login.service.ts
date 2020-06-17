@@ -1,11 +1,11 @@
-import { AddressRepository } from './../../shared/address/address.repository';
+import { AddressRepository } from './../../shared/orm/address/address.repository';
 /* eslint-disable @typescript-eslint/camelcase */
-import { UserRepository } from './../../shared/user/user.repository';
-import { User } from './../../shared/user/user.entity';
+import { UserRepository } from './../../shared/orm/user/user.repository';
+import { User } from './../../shared/orm/user/user.entity';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserAccountDto } from './dto/user-account.dto';
-import { Address } from 'src/shared/address/address.entity';
+import { Address } from 'src/shared/orm/address/address.entity';
 
 import bcrypt = require('bcrypt');
 

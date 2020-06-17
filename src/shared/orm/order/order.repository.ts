@@ -20,4 +20,20 @@ export class OrderRepository extends Repository<Order> {
             ]
         });
     }
+
+    public async selectOrderByName(name_product: string): Promise<Order> {
+        return this.findOne({
+            join: {
+                alias: 'o',
+                innerJoinAndSelect: {
+                    user: 'o.user',
+                    productsOrdered: 'o.productsOrdered',
+                    product: 'productsOrdered.product'
+                }
+            },
+            where: [
+                { name_product }
+            ]
+        });
+    }
 }

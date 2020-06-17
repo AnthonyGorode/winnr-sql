@@ -1,9 +1,9 @@
 import { HomeService } from './home.service';
-import { Product } from '../../shared/product/product.entity';
+import { Product } from '../../shared/orm/product/product.entity';
 import { Controller, Get } from '@nestjs/common';
-import { Game } from 'src/shared/game/game.entity';
-import { BattleRoyale } from 'src/shared/battle_royale/battle_royale.entity';
-import { Giveaway } from 'src/shared/giveaway/giveaway.entity';
+import { Game } from 'src/shared/orm/game/game.entity';
+import { BattleRoyale } from 'src/shared/orm/battle_royale/battle_royale.entity';
+import { Giveaway } from 'src/shared/orm/giveaway/giveaway.entity';
 
 /**
  * Manage all user requests about the home
