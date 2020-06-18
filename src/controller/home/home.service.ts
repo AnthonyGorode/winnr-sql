@@ -1,17 +1,17 @@
 import { BattleRoyaleRepository } from './../../shared/orm/battle_royale/battle_royale.repository';
 import { BattleRoyale } from './../../shared/orm/battle_royale/battle_royale.entity';
-import { GameRepository } from '../../shared/orm/game/game.repository';
-import { Product } from '../../shared/orm/product/product.entity';
+import { GameRepository } from './../../shared/orm/game/game.repository';
+import { Product } from './../../shared/orm/product/product.entity';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ProductRepository } from '../../shared/orm/product/product.repository';
-import { Game } from 'src/shared/orm/game/game.entity';
-import { SkinsRepository } from 'src/shared/orm/skins/skins.repository';
-import { Skins } from 'src/shared/orm/skins/skins.entity';
-import { GiftCard } from 'src/shared/orm/gift_card/gift_card.entity';
-import { GiftCardRepository } from 'src/shared/orm/gift_card/gift_card.repository';
-import { GiveawayRepository } from 'src/shared/orm/giveaway/giveaway.repository';
-import { Giveaway } from 'src/shared/orm/giveaway/giveaway.entity';
+import { Game } from './../../shared/orm/game/game.entity';
+import { SkinsRepository } from './../../shared/orm/skins/skins.repository';
+import { Skins } from './../../shared/orm/skins/skins.entity';
+import { GiftCard } from './../../shared/orm/gift_card/gift_card.entity';
+import { GiftCardRepository } from './../../shared/orm/gift_card/gift_card.repository';
+import { GiveawayRepository } from './../../shared/orm/giveaway/giveaway.repository';
+import { Giveaway } from './../../shared/orm/giveaway/giveaway.entity';
 
 /**
  * Provide all operations about home :
@@ -56,7 +56,6 @@ export class HomeService {
      */
     public getAllProducts(): Promise<any> {
         return this.productRepository.queryAllProductsDetails();
-        // return this.productRepository.find({ relations: ['productTranslation','productRequirement','productRequirement.requirement'] });
     }
 
     /**

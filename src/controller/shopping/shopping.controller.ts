@@ -4,12 +4,31 @@ import { Controller, Post, HttpCode, Body, Delete, Get, Param } from '@nestjs/co
 import { CreateOrderDto } from './dto/create-order.dto';
 import { DeleteProductOrderDto } from './dto/delete-product-order.dto';
 
+/**
+ * Manage all user requests about the shopping
+ *
+ * @export
+ * @class ShoppingController
+ */
 @Controller('shopping')
 export class ShoppingController {
 
     constructor(
         private readonly shoppingService: ShoppingService
     ) {}
+
+    /**
+     * Create a order
+     *
+     * @param {CreateOrderDto} createOrderDto
+     * @returns
+     * @memberof ShoppingController
+     */
+    @Post()
+    @HttpCode(201)
+    makeNewOrder(@Body() createOrderDto: CreateOrderDto) {
+        return this.shoppingService.createOrder(createOrderDto.id_user, createOrderDto.id_products);
+    }
 
     @Get(':id')
     @HttpCode(200)
@@ -21,12 +40,6 @@ export class ShoppingController {
     @HttpCode(200)
     showOrderNameDetails(@Param('name') name_product: string) {
         return this.shoppingService.getOrderByName(name_product);
-    }
-
-    @Post()
-    @HttpCode(201)
-    makeNewOrder(@Body() createOrderDto: CreateOrderDto) {
-        return this.shoppingService.createOrder(createOrderDto.id_user, createOrderDto.id_products);
     }
 
     @Delete()

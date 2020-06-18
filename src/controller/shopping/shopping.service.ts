@@ -74,21 +74,21 @@ export class ShoppingService {
     id_products: number[],
   ): Promise<Order> {
     try {
-      const user: User = await this.userRepository.findOne({ id_user });
+      const user: User = await this.userRepository.findOne({ id_user }); // find user who ordered
 
       const products: Product[] = [];
       for (const id_product of id_products) {
-        const product = await this.productRepository.findOne({ id_product });
+        const product = await this.productRepository.findOne({ id_product }); // find each product concerned by the order
         products.push(product);
       }
 
       const order: Order = this.orderRepository.create();
       order.number_order = 'B43456ABC';
       order.pdf_url_order = 'azety12434.pdf';
-      (order.status_order = 'PAYMENT ACCEPTED'),
-        (order.gross_price_order = 0.0);
-      order.user = user;
-      const newOrder: Order = await this.orderRepository.save(order);
+      order.status_order = 'PAYMENT ACCEPTED';
+      order.gross_price_order = 0.0;
+      order.user = user; // add the user instance
+      const newOrder: Order = await this.orderRepository.save(order); // create the order
 
       const orderProduct: OrderProduct = this.orderProductRepository.create();
       let totalPrice = 0.0;
@@ -98,14 +98,14 @@ export class ShoppingService {
         orderProduct.quantity = 1;
         totalPrice +=
           +product.recommanded_price_product || +product.price_product;
-        await this.orderProductRepository.save(orderProduct);
+        await this.orderProductRepository.save(orderProduct); // save all products concerned by the order
       }
 
-      await this.orderRepository.update(newOrder.id_order, {
+      await this.orderRepository.update(newOrder.id_order, { // update the order price
         gross_price_order: totalPrice,
       });
 
-      return await this.orderRepository.selectSpecificOrder(newOrder.id_order);
+      return await this.orderRepository.selectSpecificOrder(newOrder.id_order); // return the new order created
     } catch (error) {
       this.errorsHandlerService.internalError(error.message);
     }
