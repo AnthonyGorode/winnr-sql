@@ -2,25 +2,23 @@
 import { EntityRepository, Repository } from 'typeorm';
 import { Product } from '../product/product.entity';
 
+/**
+ * Product Repository
+ *
+ * @export
+ * @class ProductRepository
+ * @extends {Repository<Product>}
+ */
 @EntityRepository(Product)
 export class ProductRepository extends Repository<Product> {
-  findByName(nameProduct: string): Promise<Product> {
-    return this.findOne({ name_product: nameProduct });
-  }
 
-  findProductsWithRequirementsAndTranslations(): Promise<Product[]> {
-    return this.find({
-      join: {
-        alias: 'product',
-        leftJoinAndSelect: {
-          productTranslation: 'product.productTranslation',
-          productRequirement: 'product.productRequirement',
-          requirement: 'productRequirement.requirement',
-        },
-      },
-    });
-  }
-
+  
+  /**
+   * List of products with their requirements, platform, developer and product type
+   *
+   * @returns {Promise<Product[]>}
+   * @memberof ProductRepository
+   */
   queryAllProductsDetails(): Promise<Product[]> {
     return this.createQueryBuilder('p')
         .leftJoinAndMapMany(
@@ -68,4 +66,35 @@ export class ProductRepository extends Repository<Product> {
         .orderBy('p.id_product')
         .getMany();
   }
+
+  /**
+   * Return product according to the name
+   *
+   * @param {string} nameProduct
+   * @returns {Promise<Product>}
+   * @memberof ProductRepository
+   */
+  findByName(nameProduct: string): Promise<Product> {
+    return this.findOne({ name_product: nameProduct });
+  }
+
+  /**
+   * List of products with requirements and translations
+   *
+   * @returns {Promise<Product[]>}
+   * @memberof ProductRepository
+   */
+  findProductsWithRequirementsAndTranslations(): Promise<Product[]> {
+    return this.find({
+      join: {
+        alias: 'product',
+        leftJoinAndSelect: {
+          productTranslation: 'product.productTranslation',
+          productRequirement: 'product.productRequirement',
+          requirement: 'productRequirement.requirement',
+        },
+      },
+    });
+  }
+
 }
